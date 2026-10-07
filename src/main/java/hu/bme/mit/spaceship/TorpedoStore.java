@@ -8,7 +8,8 @@ import java.util.Random;
 * (Deliberately contains bugs.)
 */
 public class TorpedoStore {
-
+  // Random generator for simulating failure of torpedo firing
+  // moved to class level
   private Random generator = new Random();
 
 
@@ -35,6 +36,7 @@ public class TorpedoStore {
 
   public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
+      // this needs to be thrown, it wasn't before
       throw new IllegalArgumentException("numberOfTorpedos");
     }
 
@@ -45,6 +47,7 @@ public class TorpedoStore {
 
     if (r >= FAILURE_RATE) {
       // successful firing
+      // bug fixed here
       this.torpedoCount -= numberOfTorpedos;
       success = true;
     } else {
